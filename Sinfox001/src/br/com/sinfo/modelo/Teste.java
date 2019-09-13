@@ -1,6 +1,5 @@
 package br.com.sinfo.modelo;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import br.com.sinfo.Data;
 import br.com.sinfo.Pessoa;
