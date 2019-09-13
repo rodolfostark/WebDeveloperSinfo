@@ -1,5 +1,6 @@
 package br.com.sinfo.modelo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import br.com.sinfo.Data;
 import br.com.sinfo.Pessoa;
@@ -16,6 +17,8 @@ public class Teste
 		Pessoa pessoa = new Pessoa();
 		ItemRequisicao itens = new ItemRequisicao();
 		Data data = new Data();
+		int code;
+		int qtdItens;
 		while(menu != 0)
 		{
 			System.out.println("=-=-=-=-=-=-=-=-=-=-Menu-=-=-=-=-=-=-=-=-=-=");
@@ -44,7 +47,7 @@ public class Teste
 				break;
 			case 2:
 				System.out.print("Digite o código do produto que deseja remover do estoque: ");
-				int code = opcoes.nextInt();
+				code = opcoes.nextInt();
 				produto = almoxarifado.buscarProduto(code);
 				almoxarifado.removerProdutos(produto);
 				break;
@@ -60,7 +63,31 @@ public class Teste
 				 pessoa.setNome(opcoes.next());
 				 System.out.print("Digite a data no formato DD/MM/AAA: ");
 				 data.setData(opcoes.next());
-				 
+				 System.out.print("Informe o número da requisição: ");
+				 requisicao.setNumero(opcoes.nextInt());
+				 requisicao.setDataDeCadastro(data);
+				 requisicao.setPessoa(pessoa);
+				 System.out.print("Informe a quantidade de itens da sua requisição: ");
+				 qtdItens = opcoes.nextInt();
+				 almoxarifado.listarProdutos();
+				 for (int i = 0; i < qtdItens; i++) {
+					System.out.print("Informe o código de um produto: ");
+					code = opcoes.nextInt();
+					produto = almoxarifado.buscarProduto(code);
+					while(produto == null)
+					{
+						System.out.println("O código do produto informado não existe! Tente novamente.");
+						System.out.print("Informe o código de um produto: ");
+						code = opcoes.nextInt();
+						produto = almoxarifado.buscarProduto(code);
+					}
+					System.out.print("Informe a quantidade desse produto: ");
+					qtdItens = opcoes.nextInt();
+					itens.setProduto(produto);
+					itens.setQuantidade(qtdItens);
+					itens.setValor(produto.getValor() * qtdItens);
+					requisicao.getColecaoDeItens().add(itens);
+				}
 				break;
 			}
 		}

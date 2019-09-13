@@ -61,6 +61,17 @@ public class Almoxarifado
 		}
 		return null;
 	}
+	public int buscarProdutoIndice(int codigo)
+	{
+		for(Produto produto : colecaoDeProdutos)
+		{
+			if(produto.getCodigo() == codigo)
+			{
+				return colecaoDeProdutos.indexOf(produto);
+			}
+		}
+		return -1;
+	}
 	
 
 }
