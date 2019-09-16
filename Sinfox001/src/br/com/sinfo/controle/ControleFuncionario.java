@@ -1,7 +1,5 @@
 package br.com.sinfo.controle;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,9 +30,9 @@ public class ControleFuncionario {
 			double salarioBase = Double.parseDouble(leitura);
 			leitura = JOptionPane.showInputDialog("Informe a gratificação geral");
 			double gratificacaoGeral = Double.parseDouble(leitura);
-			leitura = JOptionPane.showInputDialog("Ele é um funcionário temporário?");
+			leitura = JOptionPane.showInputDialog("Ele é um funcionário temporário?[S/N]");
 			
-			if(leitura.equals("sim"))
+			if(leitura.toLowerCase().equals("s"))
 			{
 				leitura = JOptionPane.showInputDialog("Informe a data do fim do contrato (dd/mm/aaa)");
 				Temporario novoFuncionario = new Temporario();
@@ -47,8 +45,8 @@ public class ControleFuncionario {
 			}
 			else
 			{
-				leitura = JOptionPane.showInputDialog("Ele exerce algum cargo de chefia?");
-				if(leitura.equals("sim"))
+				leitura = JOptionPane.showInputDialog("Ele exerce algum cargo de chefia? [S/N]");
+				if(leitura.toLowerCase().equals("s"))
 				{
 					leitura = JOptionPane.showInputDialog("Qual o cargo?");
 					String funcao = leitura;
@@ -59,22 +57,38 @@ public class ControleFuncionario {
 					novoFuncionario.setNome(nome);
 					novoFuncionario.setSalarioBase(salarioBase);
 					novoFuncionario.setGratificacaoGeral(gratificacaoGeral);
+					novoFuncionario.setFuncao(funcao);
 					novoFuncionario.setGratificacaoChefia(gratificacaoChefia);
 					folhaDePagamento.add(novoFuncionario);
-					//A folha de pagamento não está adicionando um novo funcionário O.o
+					
 				}
 			}
-			JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!"
-					+ "Nome: " + nome);
+			JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!");
 			break;
 		case 2:
+			leitura = JOptionPane.showInputDialog("Digite o cpf do funcionário que deseja remover");
+			cpf = Long.parseLong(leitura);
+			for(Funcionario funcionario : folhaDePagamento)
+			{
+				if(funcionario.getCpf() == cpf)
+				{
+					folhaDePagamento.remove(folhaDePagamento.indexOf(funcionario));
+					JOptionPane.showMessageDialog(null, "Funcionario removido com sucesso!");
+				}
+			}
 			break;
-		case 3:		
+		case 3:
+			double somaTotalFolhaDePagamento = 0;
+			for(Funcionario funcionario : folhaDePagamento)
+			{
+				System.out.println("cpf: " + funcionario.getCpf() + ", nome: " + funcionario.getNome() + ", salário: " + funcionario.calculaSalario());
+				somaTotalFolhaDePagamento += funcionario.calculaSalario();
+			}
+			System.out.println("Valor total da folha de pagamento: " + somaTotalFolhaDePagamento);
 			break;
 		default:
 			System.out.println("Opção inválida!");
 		}
-		System.out.println(folhaDePagamento.size());
+		ler.close();
 	}
-
 }

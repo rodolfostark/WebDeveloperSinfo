@@ -48,5 +48,18 @@ public class Funcionario
 	public void setGratificacaoGeral(double gratificacaoGeral) {
 		this.gratificacaoGeral = gratificacaoGeral;
 	}
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		if (cpf != other.cpf)
+			return false;
+		return true;
+	}
+	
 	
 }
