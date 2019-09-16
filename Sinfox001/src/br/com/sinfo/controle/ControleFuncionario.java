@@ -87,7 +87,7 @@ public class ControleFuncionario {
 			System.out.println("Valor total da folha de pagamento: " + somaTotalFolhaDePagamento);
 			break;
 		default:
-			System.out.println("Opção inválida!");
+			JOptionPane.showMessageDialog(null, "Opção inválida!");
 		}
 		ler.close();
 	}
