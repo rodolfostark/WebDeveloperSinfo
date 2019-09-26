@@ -5,26 +5,25 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.com.sinfo.modelo.Conta;
+import br.com.sinfo.util.JPAUtil;
 
 public class TesteConta 
 {
 	public static void main(String[] args) 
 	{
 		Conta conta = new Conta();
-		conta.setTitular("Fulano");
+		conta.setTitular("Beltrano");
 		conta.setBanco("Caixa");
 		conta.setAgencia("123");
 		conta.setNumero("456");
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Sinfox003");
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = new JPAUtil().getEntityManager();
 		
 		em.getTransaction().begin();
 		em.persist(conta);
 		em.getTransaction().commit();
 		
 		em.close();
-		emf.close();
 	}
 
 }
