@@ -10,7 +10,7 @@ public class TesteBuscaConta {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 		Conta conta = em.find(Conta.class, 4);
-		
+		 	
 		conta.setTitular("Pedro");
 		
 		System.out.println(conta.getTitular());

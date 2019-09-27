@@ -16,11 +16,13 @@ public class TesteConta
 		conta.setBanco("Caixa");
 		conta.setAgencia("123");
 		conta.setNumero("456");
+		conta.setId(1);
 		
 		EntityManager em = new JPAUtil().getEntityManager();
 		
 		em.getTransaction().begin();
-		em.persist(conta);
+		conta = em.find(Conta.class, 1);
+		em.remove(conta);
 		em.getTransaction().commit();
 		
 		em.close();
